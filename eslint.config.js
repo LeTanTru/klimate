@@ -1,10 +1,10 @@
-import js from '@eslint/js';
-import globals from 'globals';
-import react from 'eslint-plugin-react';
-import reactHooks from 'eslint-plugin-react-hooks';
-import reactRefresh from 'eslint-plugin-react-refresh';
-import tseslint from 'typescript-eslint';
-import { defineConfig, globalIgnores } from 'eslint/config';
+import js from '@eslint/js'
+import react from 'eslint-plugin-react'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import { defineConfig, globalIgnores } from 'eslint/config'
+import globals from 'globals'
+import tseslint from 'typescript-eslint'
 
 export default defineConfig([
   globalIgnores(['dist', 'node_modules']),
@@ -34,6 +34,9 @@ export default defineConfig([
     },
 
     rules: {
+      'react/jsx-uses-react': 'error',
+      'react/react-in-jsx-scope': 'error',
+
       // TypeScript
       'no-unused-vars': 'off',
 
@@ -70,4 +73,4 @@ export default defineConfig([
       'react-hooks/exhaustive-deps': 'warn'
     }
   }
-]);
+])
