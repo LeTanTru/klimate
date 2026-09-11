@@ -1,5 +1,4 @@
 import js from '@eslint/js'
-import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import { defineConfig, globalIgnores } from 'eslint/config'
@@ -23,20 +22,7 @@ export default defineConfig([
       globals: globals.browser
     },
 
-    plugins: {
-      react
-    },
-
-    settings: {
-      react: {
-        version: 'detect'
-      }
-    },
-
     rules: {
-      'react/jsx-uses-react': 'error',
-      'react/react-in-jsx-scope': 'error',
-
       // TypeScript
       'no-unused-vars': 'off',
 
@@ -53,11 +39,6 @@ export default defineConfig([
 
       '@typescript-eslint/no-non-null-asserted-optional-chain': 'off',
 
-      // React
-      'react/jsx-no-target-blank': 'error',
-      'react/prop-types': 'off',
-      'react/display-name': 'off',
-
       // Code quality
       'no-console': 'warn',
       'no-debugger': 'warn',
@@ -68,9 +49,19 @@ export default defineConfig([
       'no-empty-function': 'off',
       'prefer-const': 'off',
 
+      // React Refresh
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+
       // Hooks
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn'
+    }
+  },
+
+  {
+    files: ['src/components/ui/**/*.{ts,tsx}'],
+    rules: {
+      'react-refresh/only-export-components': 'off'
     }
   }
 ])
