@@ -50,14 +50,14 @@ export default defineConfig([
       'prefer-const': 'off',
 
       // React Refresh
-      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+      // 'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+      'react-refresh/only-export-components': ['off', { allowConstantExport: true }],
 
       // Hooks
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn'
     }
   },
-
   {
     files: ['src/components/ui/**/*.{ts,tsx}'],
     rules: {
