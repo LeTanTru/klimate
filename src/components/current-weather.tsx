@@ -11,7 +11,7 @@ const CurrentWeather = ({ data, location }: CurrentWeatherProps) => {
   const {
     weather: [currentWeather],
     main: { temp, feels_like, temp_min, temp_max, humidity },
-    wind: { speed, deg, gust }
+    wind: { speed }
   } = data
 
   const formatTemp = (temp: number) => `${Math.round(temp)}°C`
