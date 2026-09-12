@@ -1,6 +1,7 @@
 import { cn } from 'cn'
 import { AlertTriangle, MapPin, RefreshCcw } from 'lucide-react'
 import CurrentWeather from '@/components/current-weather'
+import HourlyTemperature from '@/components/hourly-temperature'
 import WeatherSkeleton from '@/components/loading-skeleton'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
@@ -102,11 +103,11 @@ const WeatherDashBoard = () => {
       </div>
 
       {/* Current and Hourly weather */}
-      <div className='grid gap-6'>
-        <div className='mt-4'>
+      <div className='mt-4 grid gap-6'>
+        <div className='flex flex-col gap-4 lg:flex-row'>
           <CurrentWeather data={weatherQuery.data} location={location} />
+          <HourlyTemperature data={forecastQuery.data} />
         </div>
-        <div className=''></div>
       </div>
     </div>
   )
