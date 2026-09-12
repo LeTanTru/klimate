@@ -1,5 +1,6 @@
 import { cn } from 'cn'
 import { AlertTriangle, MapPin, RefreshCcw } from 'lucide-react'
+import CurrentWeather from '@/components/current-weather'
 import WeatherSkeleton from '@/components/loading-skeleton'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
@@ -59,7 +60,7 @@ const WeatherDashBoard = () => {
     )
   }
 
-  // const locationName = locationQuery.data?.[0]?.name || 'Unknown Location'
+  const location = locationQuery.data?.[0]
 
   if (weatherQuery.error || forecastQuery.error) {
     return (
@@ -99,7 +100,14 @@ const WeatherDashBoard = () => {
           />
         </Button>
       </div>
+
       {/* Current and Hourly weather */}
+      <div className='grid gap-6'>
+        <div className='mt-4'>
+          <CurrentWeather data={weatherQuery.data} location={location} />
+        </div>
+        <div className=''></div>
+      </div>
     </div>
   )
 }
