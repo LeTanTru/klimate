@@ -39,6 +39,15 @@ const HourlyTemperature = ({ data }: HourlyTemperatureProps) => {
               />
 
               <Tooltip
+                cursor={{
+                  stroke: '#888888',
+                  strokeWidth: 1,
+                  strokeDasharray: '4 4',
+                  className: 'transition-all duration-150 ease-out',
+                  style: { transition: 'all 0.15s ease-out' }
+                }}
+                animationDuration={150}
+                animationEasing='ease-out'
                 content={({ active, payload }) => {
                   if (active && payload && payload.length) {
                     return (
@@ -63,7 +72,18 @@ const HourlyTemperature = ({ data }: HourlyTemperatureProps) => {
                   return null
                 }}
               />
-              <Line type='monotone' dataKey='temp' stroke='#2563eb' strokeWidth={2} dot={false} />
+              <Line
+                type='monotone'
+                dataKey='temp'
+                stroke='#2563eb'
+                strokeWidth={2}
+                dot={false}
+                activeDot={{
+                  r: 4,
+                  className: 'transition-all duration-150 ease-out',
+                  style: { transition: 'all 0.15s ease-out' }
+                }}
+              />
               <Line
                 type='monotone'
                 dataKey='feels_like'
@@ -71,6 +91,11 @@ const HourlyTemperature = ({ data }: HourlyTemperatureProps) => {
                 strokeWidth={2}
                 dot={false}
                 strokeDasharray='5 5'
+                activeDot={{
+                  r: 4,
+                  className: 'transition-all duration-150 ease-out',
+                  style: { transition: 'all 0.15s ease-out' }
+                }}
               />
             </LineChart>
           </ResponsiveContainer>
