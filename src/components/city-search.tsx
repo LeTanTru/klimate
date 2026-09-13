@@ -52,28 +52,18 @@ const CitySearch = () => {
         className='relative w-full justify-start text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64'
         onClick={() => setOpen(true)}
       >
-        <Search className='mr-2 size-4' /> Search cities...
+        <Search className='mr-2 size-4' /> Search city...
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>
         <Command>
-          <CommandInput placeholder='Search cities...' value={query} onValueChange={setQuery} />
+          <CommandInput placeholder='Search city...' value={query} onValueChange={setQuery} />
           <CommandList>
             {query.length > 2 && !isLoading && <CommandEmpty>No results found</CommandEmpty>}
             {favorites.length > 0 && (
               <>
-                <CommandSeparator className='bg-primary' />
                 <CommandGroup>
                   <div className='mb-1 flex items-center justify-between pl-1'>
                     <p>Favorites</p>
-                    <Button
-                      title='Clear all'
-                      variant='ghost'
-                      size='sm'
-                      onClick={() => clearHistory()}
-                      className='size-fit p-0! hover:opacity-80'
-                    >
-                      <XCircle className='size-4' />
-                    </Button>
                   </div>
                   {favorites.map((item) => (
                     <CommandItem
@@ -100,7 +90,7 @@ const CitySearch = () => {
             )}
             {history.length > 0 && (
               <>
-                <CommandSeparator className='bg-primary' />
+                <CommandSeparator />
                 <CommandGroup>
                   <div className='mb-1 flex items-center justify-between pl-1'>
                     <p>Recent Searches</p>
@@ -139,8 +129,20 @@ const CitySearch = () => {
             )}
             {locations && locations.length > 0 && (
               <>
-                <CommandSeparator />
-                <CommandGroup heading='Suggestions'>
+                <CommandSeparator alwaysRender />
+                <CommandGroup>
+                  <div className='mb-1 flex items-center justify-between pl-1'>
+                    <p>Suggestions</p>
+                    <Button
+                      title='Clear all'
+                      variant='ghost'
+                      size='sm'
+                      onClick={() => setQuery('')}
+                      className='size-fit p-0! hover:opacity-80'
+                    >
+                      <XCircle className='size-4' />
+                    </Button>
+                  </div>
                   {isLoading && (
                     <div className='flex items-center justify-center p-4'>
                       <Loader2 className='size-4 animate-spin' />
