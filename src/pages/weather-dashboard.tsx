@@ -1,5 +1,5 @@
 import { cn } from 'cn'
-import { AlertTriangle, MapPin, RefreshCcw } from 'lucide-react'
+import { AlertTriangle, MapPin, RefreshCw } from 'lucide-react'
 import CurrentWeather from '@/components/current-weather'
 import HourlyTemperature from '@/components/hourly-temperature'
 import WeatherSkeleton from '@/components/loading-skeleton'
@@ -73,7 +73,7 @@ const WeatherDashBoard = () => {
         <AlertDescription>
           <p>Failed to fetch weather data. Please try again.</p>
           <Button onClick={handleRefresh} variant='outline' className='w-fit'>
-            <MapPin className='mr-2 size-4' />
+            <RefreshCw className='mr-2 size-4' />
             Retry
           </Button>
         </AlertDescription>
@@ -86,7 +86,7 @@ const WeatherDashBoard = () => {
   }
 
   return (
-    <div className=''>
+    <>
       {/* Favorite Cities */}
       <div className='flex items-center justify-between'>
         <h1 className='text-xl font-bold tracking-tight'>My Location</h1>
@@ -96,7 +96,7 @@ const WeatherDashBoard = () => {
           onClick={handleRefresh}
           disabled={weatherQuery.isFetching || forecastQuery.isFetching}
         >
-          <RefreshCcw
+          <RefreshCw
             className={cn('size-4', {
               'animate-spin': weatherQuery.isFetching || forecastQuery.isFetching
             })}
@@ -115,7 +115,7 @@ const WeatherDashBoard = () => {
           <WeatherForeCast data={forecastQuery.data} />
         </div>
       </div>
-    </div>
+    </>
   )
 }
 export default WeatherDashBoard
