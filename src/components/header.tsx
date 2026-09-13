@@ -1,6 +1,7 @@
 import { cn } from 'cn'
 import { Moon, Sun } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import CitySearch from '@/components/city-search'
 import { useTheme } from '@/contexts/theme-provider'
 
 const Header = () => {
@@ -22,18 +23,25 @@ const Header = () => {
           />
         </Link>
 
-        <div
-          className={cn(
-            'flex cursor-pointer items-center transition transition-transform duration-500',
-            {
-              'rotate-180': isDarkMode,
-              'rotate-0': !isDarkMode
-            }
-          )}
-        >
-          <button onClick={handleToggleTheme} className='size-6'>
-            {isDarkMode ? <Sun className='text-yellow-500' /> : <Moon className='text-blue-500' />}
-          </button>
+        <div className='flex items-center gap-4'>
+          <CitySearch />
+          <div
+            className={cn(
+              'flex cursor-pointer items-center transition transition-transform duration-500',
+              {
+                'rotate-180': isDarkMode,
+                'rotate-0': !isDarkMode
+              }
+            )}
+          >
+            <button onClick={handleToggleTheme} className='size-6'>
+              {isDarkMode ? (
+                <Sun className='text-yellow-500' />
+              ) : (
+                <Moon className='text-blue-500' />
+              )}
+            </button>
+          </div>
         </div>
       </div>
     </header>

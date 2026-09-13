@@ -17,22 +17,18 @@ const CurrentWeather = ({ data, location }: CurrentWeatherProps) => {
   const formatTemp = (temp: number) => `${Math.round(temp)}°C`
 
   return (
-    <Card className='overflow-hidden'>
-      <CardContent className='p-6'>
+    <Card className='flex-1 overflow-hidden'>
+      <CardContent>
         <div className='grid gap-6 md:grid-cols-2'>
           <div className='space-y-4'>
             <div className='space-y-2'>
               <div className='flex items-end gap-1'>
-                <h2 className='text-2xl font-bold tracking-tighter'>
-                  {location?.name || 'Unknown Location'}
-                </h2>
-                {location?.state && (
+                <h2 className='text-2xl font-bold tracking-tighter'>{location?.name}</h2>
+                {location?.state && location.state !== 'undefined' && (
                   <span className='text-muted-foreground'>, {location?.state}</span>
                 )}
               </div>
-              <p className='text-sm text-muted-foreground'>
-                {location?.country || 'Unknown Country'}
-              </p>
+              <p className='text-sm text-muted-foreground'>{location?.country}</p>
             </div>
             <div className='flex items-center gap-4'>
               <p className='text-7xl font-bold tracking-tighter'>{formatTemp(temp)}</p>

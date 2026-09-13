@@ -11,5 +11,28 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('recharts') || id.includes('d3-')) {
+              return 'recharts-vendor'
+            }
+            if (id.includes('@tanstack')) {
+              return 'tanstack-vendor'
+            }
+            if (
+              id.includes('react') ||
+              id.includes('react-dom') ||
+              id.includes('react-router-dom')
+            ) {
+              return 'react-vendor'
+            }
+          }
+        }
+      }
+    }
   }
 })

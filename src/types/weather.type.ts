@@ -76,5 +76,5 @@ export type GeocodeResType = {
   lat: number
   lon: number
   country: string
-  state: string
+  state?: string
 }

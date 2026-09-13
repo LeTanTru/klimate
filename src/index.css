@@ -131,3 +131,9 @@
     cursor: pointer;
   }
 }
+
+.recharts-tooltip-cursor,
+.recharts-active-dot,
+.recharts-active-dot circle {
+  transition: all 0.15s ease-out;
+}

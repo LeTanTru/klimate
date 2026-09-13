@@ -1,9 +1,13 @@
 import { cn } from 'cn'
-import { AlertTriangle, MapPin, RefreshCcw } from 'lucide-react'
+import { AlertTriangle, MapPin, RefreshCw } from 'lucide-react'
 import CurrentWeather from '@/components/current-weather'
+import FavoriteCities from '@/components/favorite-cities'
+import HourlyTemperature from '@/components/hourly-temperature'
 import WeatherSkeleton from '@/components/loading-skeleton'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
+import WeatherDetails from '@/components/weather-detailts'
+import WeatherForeCast from '@/components/weather-forecast'
 import { useGeolocation } from '@/hooks/use-geolocation'
 import { useForecastQuery, useReverseGeocodeQuery, useWeatherQuery } from '@/hooks/use-weather'
 
@@ -70,7 +74,7 @@ const WeatherDashBoard = () => {
         <AlertDescription>
           <p>Failed to fetch weather data. Please try again.</p>
           <Button onClick={handleRefresh} variant='outline' className='w-fit'>
-            <MapPin className='mr-2 size-4' />
+            <RefreshCw className='mr-2 size-4' />
             Retry
           </Button>
         </AlertDescription>
@@ -83,8 +87,8 @@ const WeatherDashBoard = () => {
   }
 
   return (
-    <div className=''>
-      {/* Favorite Cities */}
+    <>
+      <FavoriteCities />
       <div className='flex items-center justify-between'>
         <h1 className='text-xl font-bold tracking-tight'>My Location</h1>
         <Button
@@ -93,7 +97,7 @@ const WeatherDashBoard = () => {
           onClick={handleRefresh}
           disabled={weatherQuery.isFetching || forecastQuery.isFetching}
         >
-          <RefreshCcw
+          <RefreshCw
             className={cn('size-4', {
               'animate-spin': weatherQuery.isFetching || forecastQuery.isFetching
             })}
@@ -101,14 +105,17 @@ const WeatherDashBoard = () => {
         </Button>
       </div>
 
-      {/* Current and Hourly weather */}
-      <div className='grid gap-6'>
-        <div className='mt-4'>
+      <div className='mt-4 grid gap-6'>
+        <div className='flex flex-col gap-4 lg:flex-row'>
           <CurrentWeather data={weatherQuery.data} location={location} />
+          <HourlyTemperature data={forecastQuery.data} />
         </div>
-        <div className=''></div>
+        <div className='grid items-start gap-6 md:grid-cols-2'>
+          <WeatherDetails data={weatherQuery.data} />
+          <WeatherForeCast data={forecastQuery.data} />
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 export default WeatherDashBoard

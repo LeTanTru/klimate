@@ -5,7 +5,8 @@ import type { Coord } from '@/types/weather.type'
 export const WEATHER_KEYS = {
   weather: (coord: Coord | null) => ['weather', coord] as const,
   forecast: (coord: Coord | null) => ['forecast', coord] as const,
-  reverseGeocode: (coord: Coord | null) => ['reverseGeocode', coord] as const
+  reverseGeocode: (coord: Coord | null) => ['reverseGeocode', coord] as const,
+  search: (query: string) => ['search', query] as const
 } as const
 
 export const useWeatherQuery = (coord: Coord | null) => {
@@ -29,5 +30,13 @@ export const useReverseGeocodeQuery = (coord: Coord | null) => {
     queryKey: WEATHER_KEYS.reverseGeocode(coord ?? { lat: 0, lon: 0 }),
     queryFn: () => (coord ? weatherAPI.reverseGeocode(coord) : null),
     enabled: !!coord
+  })
+}
+
+export const useSearchLocationsQuery = (query: string) => {
+  return useQuery({
+    queryKey: WEATHER_KEYS.search(query),
+    queryFn: () => weatherAPI.searchLocations(query),
+    enabled: query.trim().length >= 3
   })
 }
