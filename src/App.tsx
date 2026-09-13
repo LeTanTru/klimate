@@ -1,24 +1,31 @@
+import { lazy, Suspense } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Toaster } from 'sonner'
 import Layout from '@/components/layout'
+import WeatherSkeleton from '@/components/loading-skeleton'
 import { QueryProvider } from '@/components/query-provider'
 import { ThemeProvider } from '@/contexts/theme-provider'
-import CityPage from '@/pages/city-page'
-import WeatherDashBoard from '@/pages/weather-dashboard'
+
+const WeatherDashBoard = lazy(() => import('@/pages/weather-dashboard'))
+const CityPage = lazy(() => import('@/pages/city-page'))
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <ThemeProvider defaultTheme='dark'>
-        <QueryProvider>
+    <QueryProvider>
+      <BrowserRouter>
+        <ThemeProvider defaultTheme='dark'>
           <Layout>
-            <Routes>
-              <Route path='/' element={<WeatherDashBoard />} />
-              <Route path='/city/:cityName' element={<CityPage />} />
-            </Routes>
+            <Suspense fallback={<WeatherSkeleton />}>
+              <Routes>
+                <Route path='/' element={<WeatherDashBoard />} />
+                <Route path='/city/:cityName' element={<CityPage />} />
+              </Routes>
+            </Suspense>
           </Layout>
-        </QueryProvider>
-      </ThemeProvider>
-    </BrowserRouter>
+          <Toaster richColors />
+        </ThemeProvider>
+      </BrowserRouter>
+    </QueryProvider>
   )
 }
 

@@ -1,6 +1,7 @@
 import { cn } from 'cn'
 import { AlertTriangle, MapPin, RefreshCw } from 'lucide-react'
 import CurrentWeather from '@/components/current-weather'
+import FavoriteCities from '@/components/favorite-cities'
 import HourlyTemperature from '@/components/hourly-temperature'
 import WeatherSkeleton from '@/components/loading-skeleton'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
@@ -87,7 +88,7 @@ const WeatherDashBoard = () => {
 
   return (
     <>
-      {/* Favorite Cities */}
+      <FavoriteCities />
       <div className='flex items-center justify-between'>
         <h1 className='text-xl font-bold tracking-tight'>My Location</h1>
         <Button
@@ -104,7 +105,6 @@ const WeatherDashBoard = () => {
         </Button>
       </div>
 
-      {/* Current and Hourly weather */}
       <div className='mt-4 grid gap-6'>
         <div className='flex flex-col gap-4 lg:flex-row'>
           <CurrentWeather data={weatherQuery.data} location={location} />
